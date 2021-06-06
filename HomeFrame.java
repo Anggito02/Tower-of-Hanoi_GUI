@@ -50,7 +50,7 @@ public class HomeFrame implements ActionListener
     }
 
     // Components Method
-    public void initComponents() {
+    private void initComponents() {
         /* ========== CONTAINER SETTINGS ========== */
         homeFrame.setSize(480, 600);
         homeFrame.setLocationRelativeTo(null);
@@ -118,5 +118,6 @@ public class HomeFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
         homeFrame.dispose();
+        new PlayFrame();
     }
 }
