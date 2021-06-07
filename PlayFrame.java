@@ -10,11 +10,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class PlayFrame
+public class PlayFrame implements ActionListener
 {
+    /* ===== PRIMARY USER VARIABLE ===== */
+    public int movesCounter = 0;
+
     /* ===== PRIVATE VARIABLE FOR PLAY FRAME ===== */
     // Creating frame
-    public JFrame playFrame = new JFrame("Tower of Hanoi");
+    public static JFrame playFrame = new JFrame("Tower of Hanoi");
 
     // Upper Panel
     private JPanel upperPanel = new JPanel();
@@ -22,30 +25,34 @@ public class PlayFrame
     private JButton animateButton = new JButton("Animate");
     private JButton resetButton = new JButton("Reset");
 
-    // Play Panel
+    playPanel towerPanel = new playPanel();
+    /*// Play Panel
     private JPanel playPanel = new JPanel();
-    // Shapes
-    private Graphics graphics;
+    // Buttons 
+    private JButton inputButton = new JButton("INPUT DISK");
     // Labels
-    private JLabel playPanelTitle = new JLabel("Tower of Hanoi Implementation");
+    private JLabel playPanelTitle = new JLabel("Tower of Hanoi");
+    */
 
     // Answer Panel
     private JPanel ansPanel = new JPanel();
     // Labels
-    private JLabel ansCounter = new JLabel("Moves :");
-    private JTextField ansCounterField = new JTextField();
-    private JLabel ansUser = new JLabel();
-    // Text Field
-    private JTextField ansField = new JTextField();
+    private JLabel ansCounter = new JLabel("Moves : " + movesCounter);
+    // Text Fields
+    private JTextArea ansCounterField = new JTextArea();
+    // Buttons
+    private JButton backToHomeButton = new JButton("Home");
+
     /* ===== END PRIVATE VARIABLE FOR PLAY FRAME ===== */
 
     /* ===== UTILITY ===== */
-    private Font f1 = new Font(Font.SANS_SERIF, Font.BOLD, 24);
+    private Font f1 = new Font(Font.SANS_SERIF, Font.BOLD, 18);
     private Font f2 = new Font(Font.SERIF, Font.BOLD, 16);
-    private Font f3 = new Font(Font.SERIF, Font.PLAIN, 14);
+    private Font f3 = new Font(Font.SERIF, Font.BOLD, 14);
 
     private Color c1 = new Color(104, 164, 244);
     private Color c2 = new Color(5, 29, 61);
+    private Color c3 = new Color(42, 107, 244);
 
     // Constructur for Play Frame
     public PlayFrame() {
@@ -63,7 +70,8 @@ public class PlayFrame
 
         /* ===== ADD PANELS ===== */
         playFrame.add(upperPanel);
-        playFrame.add(playPanel);
+        playFrame.add(towerPanel);
+        //playFrame.add(playPanel);
         playFrame.add(ansPanel);
 
         /* ========== END CONTAINER SETTINGS ========== */
@@ -84,6 +92,9 @@ public class PlayFrame
         resetButton.setFont(f2);
         resetButton.setForeground(c2);
         resetButton.setBackground(c1);
+        // Button Event
+        resetButton.addActionListener(this);
+        resetButton.setActionCommand("RESET");
 
         upperPanel.add(animateButton);
         upperPanel.add(resetButton);
@@ -91,25 +102,74 @@ public class PlayFrame
         /* ===== END UPPER PANEL ===== */
 
         /* ===== PLAY PANEL ===== */
-        playPanel.setBounds(0, 120, 320, 480);
+        /*playPanel.setBounds(0, 120, 320, 480);
         playPanel.setBackground(c1);
         playPanel.setLayout(null);
-        playPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        playPanelTitle.setBounds(80, 60, 255, 30);
+        inputButton.setBounds(90, 20, 140, 30);
+        inputButton.setFont(f2);
+        inputButton.setForeground(c2);
+        inputButton.setBackground(c3);
+        // Button Event
+        inputButton.addActionListener(this);
+        inputButton.setActionCommand("INPUT");
+
+        playPanelTitle.setBounds(90, 60, 140, 30);
         playPanelTitle.setFont(f1);
-        playPanelTitle.setForeground(c2);
-        playPanelTitle.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        playPanelTitle.setForeground(Color.WHITE);
 
         playPanel.add(playPanelTitle);
+        playPanel.add(inputButton);*/
 
         /* ===== END PLAY PANEL ===== */
 
         /* ===== ANS PANEL ===== */
         ansPanel.setBounds(320, 120, 160, 480);
-        ansPanel.setBackground(c1);
+        ansPanel.setBackground(c3);
         ansPanel.setLayout(null);
+
+        ansCounter.setBounds(40, 20, 60, 30);
+        ansCounter.setFont(f3);
+        ansCounter.setForeground(c2);
+
+        ansCounterField.setBounds(10, 60, 125, 320);
+
+        backToHomeButton.setBounds(10, 400, 125, 30);
+        // Button Event
+        backToHomeButton.addActionListener(this);
+        backToHomeButton.setActionCommand("Home");
+
+        ansPanel.add(ansCounter);
+        ansPanel.add(ansCounterField);
+        ansPanel.add(backToHomeButton);
         /* ===== END ANS PANEL ===== */
 
+    }
+
+    /* ===== DRAW SHAPES ===== */
+    /*public void paint(Graphics g) {
+        Graphics2D g2D = (Graphics2D) g;
+
+        g2D.drawRect(320, 320, 50, 50);
+    }*/
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+
+        if(command == "Home") {
+            playFrame.dispose();
+            new HomeFrame();
+        }
+        else if(command == "RESET") {
+            playFrame.dispose();
+            new PlayFrame();
+        }
+        /*else if(command == "INPUT") {
+            playFrame.dispose();
+            String inputUser = JOptionPane.showInputDialog("Masukkan banyak disk (1-7)");
+            HomeFrame.diskAmount = Integer.parseInt(inputUser);
+            HomeFrame.diskInput(HomeFrame.diskAmount);
+        }*/
     }
 }

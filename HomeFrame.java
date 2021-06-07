@@ -31,7 +31,7 @@ public class HomeFrame implements ActionListener
     private JLabel authorCredit = new JLabel("Designed and Coded by Anggito Anju");
 
     /* ===== PRIMARY VARIABLE ===== */
-
+    public static int diskAmount;
 
     /* ===== UTILITY ===== */
     private Font f1 = new Font(Font.SANS_SERIF, Font.BOLD, 30);
@@ -99,16 +99,26 @@ public class HomeFrame implements ActionListener
 
         /* ===== AUTHOR PANEL ===== */
         authorPanel.setBackground(c2);
-        authorPanel.setPreferredSize(new Dimension(480, 80));
+        authorPanel.setPreferredSize(new Dimension(480, 45));
         authorPanel.setLayout(null);
 
-        authorCredit.setBounds(250, 12, 200, 100);
+        authorCredit.setBounds(250, 12, 200, 20);
         authorCredit.setFont(f5);
         authorCredit.setForeground(Color.BLACK);
 
         authorPanel.add(authorCredit);
 
         /* ===== END AUTHOR PANEL ===== */
+    }
+
+    public static void diskInput(int num) {
+        if(num <= 7 && diskAmount > 0) {
+            new PlayFrame();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Must be integer 1-7", "Wrong Input", JOptionPane.ERROR_MESSAGE);
+            new HomeFrame();
+        }   
     }
 
     public static void main(String[] args) {
@@ -118,6 +128,8 @@ public class HomeFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
         homeFrame.dispose();
-        new PlayFrame();
+        String inputUser = JOptionPane.showInputDialog("Masukkan banyak disk (1-7)");
+        diskAmount = Integer.parseInt(inputUser);
+        diskInput(diskAmount);
     }
 }
