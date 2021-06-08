@@ -112,11 +112,11 @@ public class HomeFrame implements ActionListener
     }
 
     public static void diskInput(int num) {
-        if(num <= 7 && diskAmount > 0) {
+        if(num <= 5 && diskAmount > 0) {
             new PlayFrame();
         }
         else {
-            JOptionPane.showMessageDialog(null, "Must be integer 1-7", "Wrong Input", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Must be integer 1-5", "Wrong Input", JOptionPane.ERROR_MESSAGE);
             new HomeFrame();
         }   
     }
@@ -128,7 +128,7 @@ public class HomeFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
         homeFrame.dispose();
-        String inputUser = JOptionPane.showInputDialog("Masukkan banyak disk (1-7)");
+        String inputUser = JOptionPane.showInputDialog("Masukkan banyak disk (1-5)");
         diskAmount = Integer.parseInt(inputUser);
         diskInput(diskAmount);
     }

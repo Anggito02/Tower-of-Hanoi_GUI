@@ -13,7 +13,7 @@ import javax.swing.*;
 public class PlayFrame implements ActionListener
 {
     /* ===== PRIMARY USER VARIABLE ===== */
-    public int movesCounter = 0;
+    public static int movesCounter = 0;
 
     /* ===== PRIVATE VARIABLE FOR PLAY FRAME ===== */
     // Creating frame
@@ -25,14 +25,12 @@ public class PlayFrame implements ActionListener
     private JButton animateButton = new JButton("Animate");
     private JButton resetButton = new JButton("Reset");
 
-    playPanel towerPanel = new playPanel();
-    /*// Play Panel
+    // Play Panel
     private JPanel playPanel = new JPanel();
     // Buttons 
     private JButton inputButton = new JButton("INPUT DISK");
     // Labels
     private JLabel playPanelTitle = new JLabel("Tower of Hanoi");
-    */
 
     // Answer Panel
     private JPanel ansPanel = new JPanel();
@@ -70,8 +68,7 @@ public class PlayFrame implements ActionListener
 
         /* ===== ADD PANELS ===== */
         playFrame.add(upperPanel);
-        playFrame.add(towerPanel);
-        //playFrame.add(playPanel);
+        playFrame.add(playPanel);
         playFrame.add(ansPanel);
 
         /* ========== END CONTAINER SETTINGS ========== */
@@ -87,6 +84,9 @@ public class PlayFrame implements ActionListener
         animateButton.setFont(f2);
         animateButton.setForeground(c2);
         animateButton.setBackground(c1);
+        // Button Event
+        animateButton.addActionListener(this);
+        animateButton.setActionCommand("ANIMATE");
 
         resetButton.setBounds(280, 50, 100, 30);
         resetButton.setFont(f2);
@@ -102,7 +102,9 @@ public class PlayFrame implements ActionListener
         /* ===== END UPPER PANEL ===== */
 
         /* ===== PLAY PANEL ===== */
-        /*playPanel.setBounds(0, 120, 320, 480);
+        towerPanel towerPane = new towerPanel();
+
+        playPanel.setBounds(0, 120, 320, 480);
         playPanel.setBackground(c1);
         playPanel.setLayout(null);
 
@@ -118,8 +120,12 @@ public class PlayFrame implements ActionListener
         playPanelTitle.setFont(f1);
         playPanelTitle.setForeground(Color.WHITE);
 
+        towerPane.setBounds(20, 100, 280, 280);
+        towerPane.setBackground(c1);
+
         playPanel.add(playPanelTitle);
-        playPanel.add(inputButton);*/
+        playPanel.add(inputButton);
+        playPanel.add(towerPane);
 
         /* ===== END PLAY PANEL ===== */
 
@@ -146,13 +152,6 @@ public class PlayFrame implements ActionListener
 
     }
 
-    /* ===== DRAW SHAPES ===== */
-    /*public void paint(Graphics g) {
-        Graphics2D g2D = (Graphics2D) g;
-
-        g2D.drawRect(320, 320, 50, 50);
-    }*/
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
@@ -165,11 +164,19 @@ public class PlayFrame implements ActionListener
             playFrame.dispose();
             new PlayFrame();
         }
-        /*else if(command == "INPUT") {
+        else if(command == "INPUT") {
             playFrame.dispose();
-            String inputUser = JOptionPane.showInputDialog("Masukkan banyak disk (1-7)");
+
+            while(towerPanel.tower1.count() != 0) {
+                towerPanel.tower1.pop();
+            }
+
+            String inputUser = JOptionPane.showInputDialog("Masukkan banyak disk (1-5)");
             HomeFrame.diskAmount = Integer.parseInt(inputUser);
             HomeFrame.diskInput(HomeFrame.diskAmount);
-        }*/
+        }
+        else if(command == "ANIMATE") {
+
+        }
     }
 }
