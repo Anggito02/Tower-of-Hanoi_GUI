@@ -34,14 +34,15 @@ public class DiskStack
             popDisk = headDisk;
             headDisk = null;
         }
+
         else if(count() > 1) {
             Disk curr = headDisk;
-            for(int i = 0; i < count()-1; i++) {
+            while(curr.getNext().getNext() != null)  {
                 curr = curr.getNext();
             }
             popDisk = curr.getNext();
             curr.setNext(null);
-        }   
+        }
 
         return popDisk;
     }

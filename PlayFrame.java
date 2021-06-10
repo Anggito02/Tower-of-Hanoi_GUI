@@ -13,7 +13,7 @@ import javax.swing.*;
 public class PlayFrame implements ActionListener
 {
     /* ===== PRIMARY USER VARIABLE ===== */
-    public static int movesCounter = 0;
+    public static int movesCounter = 1;
 
     /* ===== PRIVATE VARIABLE FOR PLAY FRAME ===== */
     // Creating frame
@@ -27,17 +27,21 @@ public class PlayFrame implements ActionListener
 
     // Play Panel
     private JPanel playPanel = new JPanel();
+    // Inside Panel
+    towerPanel towerPane = new towerPanel();
     // Buttons 
     private JButton inputButton = new JButton("INPUT DISK");
     // Labels
     private JLabel playPanelTitle = new JLabel("Tower of Hanoi");
+    // Graphics
+    Graphics g;
 
     // Answer Panel
     private JPanel ansPanel = new JPanel();
     // Labels
-    private JLabel ansCounter = new JLabel("Moves : " + movesCounter);
+    public static JLabel ansCounter = new JLabel("Moves : " + movesCounter);
     // Text Fields
-    private JTextArea ansCounterField = new JTextArea();
+    public static JTextArea ansCounterField = new JTextArea();
     // Buttons
     private JButton backToHomeButton = new JButton("Home");
 
@@ -102,7 +106,6 @@ public class PlayFrame implements ActionListener
         /* ===== END UPPER PANEL ===== */
 
         /* ===== PLAY PANEL ===== */
-        towerPanel towerPane = new towerPanel();
 
         playPanel.setBounds(0, 120, 320, 480);
         playPanel.setBackground(c1);
@@ -134,7 +137,7 @@ public class PlayFrame implements ActionListener
         ansPanel.setBackground(c3);
         ansPanel.setLayout(null);
 
-        ansCounter.setBounds(40, 20, 60, 30);
+        ansCounter.setBounds(40, 20, 80, 30);
         ansCounter.setFont(f3);
         ansCounter.setForeground(c2);
 
@@ -162,21 +165,54 @@ public class PlayFrame implements ActionListener
         }
         else if(command == "RESET") {
             playFrame.dispose();
+
+            while(towerPane.tower1.count() > 0) {
+                towerPane.tower1.pop();
+                //System.out.println(towerPanel.tower1.count());
+            }
+
+            while(towerPane.tower2.count() > 0) {
+                towerPane.tower2.pop();
+                //System.out.println(towerPanel.tower2.count());
+            }
+
+            while(towerPane.tower3.count() > 0) {
+                towerPane.tower3.pop();
+                //System.out.println(towerPanel.tower3.count());
+            }
+
+            ansCounterField.setText("");
+            movesCounter = 1;
+
             new PlayFrame();
         }
         else if(command == "INPUT") {
             playFrame.dispose();
 
-            while(towerPanel.tower1.count() != 0) {
-                towerPanel.tower1.pop();
+            while(towerPane.tower1.count() > 0) {
+                towerPane.tower1.pop();
+                //System.out.println(towerPanel.tower1.count());
             }
+
+            while(towerPane.tower2.count() > 0) {
+                towerPane.tower2.pop();
+                //System.out.println(towerPanel.tower2.count());
+            }
+
+            while(towerPane.tower3.count() > 0) {
+                towerPane.tower3.pop();
+                //System.out.println(towerPanel.tower3.count());
+            }
+
+            ansCounterField.setText("");
+            movesCounter = 1;
 
             String inputUser = JOptionPane.showInputDialog("Masukkan banyak disk (1-5)");
             HomeFrame.diskAmount = Integer.parseInt(inputUser);
             HomeFrame.diskInput(HomeFrame.diskAmount);
         }
         else if(command == "ANIMATE") {
-
+            towerPane.moveDisks(HomeFrame.diskAmount, towerPane.tower1, towerPane.tower3, towerPane.tower2, 1, 3, 2);
         }
     }
 }
