@@ -46,43 +46,6 @@ public class towerPanel extends JPanel
         g2D.setPaint(c1);
         g2D.fillRect(0, 230, 280, 50);
 
-        /*// Disks
-        g2D.setPaint(c3);
-        for(int i = HomeFrame.diskAmount; i > 0; i--) {
-            g2D.fillRect(30-5*i+(HomeFrame.diskAmount-i+1), 230-(diskHeight*(HomeFrame.diskAmount-i+1)) , diskWidth+(10*i), diskHeight);
-        }
-
-        // Disks Border
-        g2D.setPaint(Color.BLACK);
-        for(int i = HomeFrame.diskAmount; i > 0; i--) {
-            g2D.drawRect(30-5*i+(HomeFrame.diskAmount-i+1), 230-(diskHeight*(HomeFrame.diskAmount-i+1)) , diskWidth+(10*i), diskHeight);
-        }*/
-
-        for(int i = 0; i < HomeFrame.diskAmount; i++) {
-            tower1.push(new Disk(55-(8*i)));
-        }
-        //System.out.println(tower1.count());
-
-        Disk current = tower1.getHead();
-
-        for(int i = 0; i<tower1.count(); i ++) {
-            g2D.setPaint(c3);
-            g2D.fillRect(37+(4*i), 215-(diskHeight*i), current.getLength(), 15);
-            g2D.setPaint(Color.BLACK);
-            g2D.drawRect(37+(4*i), 215-(diskHeight*i), current.getLength(), 15);
-            current = current.getNext();
-        }
-    }
-
-    public void drawAll(Graphics g) {
-        Graphics2D g2D = (Graphics2D) g;
-
-        // Poles
-        g2D.setPaint(c2);
-        g2D.fillRect(54, 52, 20, 200);
-        g2D.fillRect(130, 52, 20, 200);
-        g2D.fillRect(206, 52, 20, 200);
-
         Disk current = tower1.getHead();
         int i = 0;
         while(current != null) {
@@ -123,6 +86,7 @@ public class towerPanel extends JPanel
                 break;
             }
             i++;
+            current = current.getNext();
         }
 
         current = tower2.getHead();
@@ -165,6 +129,7 @@ public class towerPanel extends JPanel
                 break;
             }
             i++;
+            current = current.getNext();
         }
 
         current = tower3.getHead();
@@ -207,6 +172,7 @@ public class towerPanel extends JPanel
                 break;
             }
             i++;
+            current = current.getNext();
         }
     }
 
@@ -220,8 +186,11 @@ public class towerPanel extends JPanel
 
         PlayFrame.ansCounterField.append(a + " -> " + c + "\n");
         PlayFrame.ansCounter.setText("Moves : " + PlayFrame.movesCounter++);
-
         repaint();
+
+        try {
+            Thread.sleep(750);
+        } catch (InterruptedException e) {}
 
         moveDisks(n-1, other, end, start, b, c, a);
     }

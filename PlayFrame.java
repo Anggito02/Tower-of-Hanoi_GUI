@@ -28,7 +28,7 @@ public class PlayFrame implements ActionListener
     // Play Panel
     private JPanel playPanel = new JPanel();
     // Inside Panel
-    towerPanel towerPane = new towerPanel();
+    static towerPanel towerPane = new towerPanel();
     // Buttons 
     private JButton inputButton = new JButton("INPUT DISK");
     // Labels

@@ -113,12 +113,15 @@ public class HomeFrame implements ActionListener
 
     public static void diskInput(int num) {
         if(num <= 5 && diskAmount > 0) {
+            for(int i = 0; i < HomeFrame.diskAmount; i++) {
+                PlayFrame.towerPane.tower1.push(new Disk(55-(8*i)));
+            }
             new PlayFrame();
         }
         else {
             JOptionPane.showMessageDialog(null, "Must be integer 1-5", "Wrong Input", JOptionPane.ERROR_MESSAGE);
             new HomeFrame();
-        }   
+        }  
     }
 
     public static void main(String[] args) {
