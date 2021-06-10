@@ -183,7 +183,6 @@ public class PlayFrame implements ActionListener, Runnable
             new HomeFrame();
         }
         else if(command == "RESET") {
-            playFrame.dispose();
 
             while(towerPane.tower1.count() > 0) {
                 towerPane.tower1.pop();
@@ -203,10 +202,13 @@ public class PlayFrame implements ActionListener, Runnable
             ansCounterField.setText(null);
             movesCounter = 1;
 
-            HomeFrame.diskInput(HomeFrame.diskAmount);
+            for(int i = 0; i < HomeFrame.diskAmount; i++) {
+                PlayFrame.towerPane.tower1.push(new Disk(55-(8*i)));
+            }
+
+            towerPane.repaint();
         }
         else if(command == "INPUT") {
-            playFrame.dispose();
 
             while(towerPane.tower1.count() > 0) {
                 towerPane.tower1.pop();
@@ -226,9 +228,23 @@ public class PlayFrame implements ActionListener, Runnable
             ansCounterField.setText("");
             movesCounter = 1;
 
-            String inputUser = JOptionPane.showInputDialog("Masukkan banyak disk (1-5)");
-            HomeFrame.diskAmount = Integer.parseInt(inputUser);
-            HomeFrame.diskInput(HomeFrame.diskAmount);
+            while(true) {
+                String inputUser = JOptionPane.showInputDialog("Masukkan banyak disk (1-5)");
+                HomeFrame.diskAmount = Integer.parseInt(inputUser);
+
+                if(HomeFrame.diskAmount > 0 && HomeFrame.diskAmount <= 5) {
+                    for(int i = 0; i < HomeFrame.diskAmount; i++) {
+                        PlayFrame.towerPane.tower1.push(new Disk(55-(8*i)));
+                    }
+
+                    towerPane.repaint();
+                    break;
+                
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Must be integer 1-5", "Wrong Input", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
         else if(command == "ANIMATE") {
             Thread t1 = new Thread(this);
