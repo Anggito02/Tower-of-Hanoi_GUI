@@ -16,9 +16,6 @@ public class towerPanel extends JPanel
     private static Color c2 = new Color(245, 121, 0);
     private static Color c3 = new Color(42, 107, 244);
 
-    // Graphics
-    static Graphics g;
-
     // Stacks
     public DiskStack tower1 = new DiskStack();
     public DiskStack tower2 = new DiskStack();
@@ -224,7 +221,7 @@ public class towerPanel extends JPanel
         PlayFrame.ansCounterField.append(a + " -> " + c + "\n");
         PlayFrame.ansCounter.setText("Moves : " + PlayFrame.movesCounter++);
 
-        //drawAll(g);
+        repaint();
 
         moveDisks(n-1, other, end, start, b, c, a);
     }

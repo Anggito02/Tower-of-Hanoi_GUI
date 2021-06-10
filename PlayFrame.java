@@ -39,7 +39,7 @@ public class PlayFrame implements ActionListener
     // Answer Panel
     private JPanel ansPanel = new JPanel();
     // Labels
-    public static JLabel ansCounter = new JLabel("Moves : " + movesCounter);
+    public static JLabel ansCounter = new JLabel("Moves : 0");
     // Text Fields
     public static JTextArea ansCounterField = new JTextArea();
     // Buttons
