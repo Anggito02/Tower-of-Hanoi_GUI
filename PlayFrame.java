@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class PlayFrame implements ActionListener
+public class PlayFrame implements ActionListener, Runnable
 {
     /* ===== PRIMARY USER VARIABLE ===== */
     public static int movesCounter = 1;
@@ -161,6 +161,25 @@ public class PlayFrame implements ActionListener
 
         if(command == "Home") {
             playFrame.dispose();
+            
+            while(towerPane.tower1.count() > 0) {
+                towerPane.tower1.pop();
+                //System.out.println(towerPanel.tower1.count());
+            }
+
+            while(towerPane.tower2.count() > 0) {
+                towerPane.tower2.pop();
+                //System.out.println(towerPanel.tower2.count());
+            }
+
+            while(towerPane.tower3.count() > 0) {
+                towerPane.tower3.pop();
+                //System.out.println(towerPanel.tower3.count());
+            }
+
+            ansCounterField.setText(null);
+            movesCounter = 1;
+
             new HomeFrame();
         }
         else if(command == "RESET") {
@@ -181,10 +200,10 @@ public class PlayFrame implements ActionListener
                 //System.out.println(towerPanel.tower3.count());
             }
 
-            ansCounterField.setText("");
+            ansCounterField.setText(null);
             movesCounter = 1;
 
-            new PlayFrame();
+            HomeFrame.diskInput(HomeFrame.diskAmount);
         }
         else if(command == "INPUT") {
             playFrame.dispose();
@@ -212,7 +231,14 @@ public class PlayFrame implements ActionListener
             HomeFrame.diskInput(HomeFrame.diskAmount);
         }
         else if(command == "ANIMATE") {
-            towerPane.moveDisks(HomeFrame.diskAmount, towerPane.tower1, towerPane.tower3, towerPane.tower2, 1, 3, 2);
+            Thread t1 = new Thread(this);
+            t1.start();
         }
+    }
+
+    @Override
+    public void run() {
+        towerPane.moveDisks(HomeFrame.diskAmount, towerPane.tower1, towerPane.tower3, towerPane.tower2, 1, 3, 2);
+        try { Thread.sleep(750); } catch(Exception e) {}
     }
 }

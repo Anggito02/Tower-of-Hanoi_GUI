@@ -174,6 +174,7 @@ public class towerPanel extends JPanel
             i++;
             current = current.getNext();
         }
+        
     }
 
     public void moveDisks(int n, DiskStack start, DiskStack end, DiskStack other, int a, int c, int b) {
@@ -190,7 +191,8 @@ public class towerPanel extends JPanel
 
         try {
             Thread.sleep(750);
-        } catch (InterruptedException e) {}
+        }
+        catch(Exception e) {}
 
         moveDisks(n-1, other, end, start, b, c, a);
     }
