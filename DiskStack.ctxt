@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=DiskStack
+comment0.text=\r\n\ Stack\ with\ methods\ for\ disks\r\n\r\n\ @author\ Anggito\ Anju\r\n\ @version\ ver\ 1.0\ -\ 9\ June\ 21\r\n
+comment1.params=
+comment1.target=Disk\ getHead()
+comment2.params=nextDisk
+comment2.target=void\ push(Disk)
+comment3.params=
+comment3.target=Disk\ pop()
+comment4.params=
+comment4.target=int\ count()
+numComments=5

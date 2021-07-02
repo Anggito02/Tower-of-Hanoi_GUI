@@ -40,7 +40,7 @@ public class PlayFrame implements ActionListener, Runnable
     private JPanel ansPanel = new JPanel();
     // Labels
     public static JLabel ansCounter = new JLabel("Moves : 0");
-    // Text Fields
+    // Text Area
     public static JTextArea ansCounterField = new JTextArea();
     // Buttons
     private JButton backToHomeButton = new JButton("Home");
@@ -152,7 +152,6 @@ public class PlayFrame implements ActionListener, Runnable
         ansPanel.add(ansCounterField);
         ansPanel.add(backToHomeButton);
         /* ===== END ANS PANEL ===== */
-
     }
 
     @Override
@@ -201,6 +200,7 @@ public class PlayFrame implements ActionListener, Runnable
 
             ansCounterField.setText(null);
             movesCounter = 1;
+            ansCounter.setText("Moves : 0");
 
             for(int i = 0; i < HomeFrame.diskAmount; i++) {
                 PlayFrame.towerPane.tower1.push(new Disk(55-(8*i)));
@@ -255,6 +255,6 @@ public class PlayFrame implements ActionListener, Runnable
     @Override
     public void run() {
         towerPane.moveDisks(HomeFrame.diskAmount, towerPane.tower1, towerPane.tower3, towerPane.tower2, 1, 3, 2);
-        try { Thread.sleep(750); } catch(Exception e) {}
+        //try { Thread.sleep(750); } catch(Exception e) {}
     }
 }
